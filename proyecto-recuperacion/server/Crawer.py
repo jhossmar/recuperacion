@@ -4,14 +4,12 @@ Created on 13 de mar. de 2016
 @author: marcelo
 '''
 
-class MyClass(object):
-    '''
-    classdocs
-    '''
+class Crawer(object):
+    
 
-
+ 
     def __init__(self, params):
-        '''
+            '''
         Constructor
         '''
         
