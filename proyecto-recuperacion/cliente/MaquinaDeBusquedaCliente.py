@@ -3,21 +3,13 @@ Created on 13 de mar. de 2016
 
 @author: marcelo
 '''
-import socket
-s = socket.socket()
-s.connect(("localhost", 9999))
-while True:
-    mensaje = raw_input("> ")
-    s.send(mensaje)
-    mensaje == "quit"
-    break
-
-print "adios"
-s.close()
-
-
+  
         
+class MaquinaDeBusquedaCliente(object):
+    
+    
+    def _init_(self):
+        print "inciando  BuscadorCliente"      
         
-        
-        
-        
+    def ordenarRespuestasyMostrar(self): 
+        print "mostrando respuestas"
