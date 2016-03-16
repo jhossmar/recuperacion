@@ -10,7 +10,7 @@ class Indexador(object):
     '''
 
 
-    def __init__(self,semilla,nivelRecurcion):
+    def __init__(self):
         print "inicializando indexador... se encarga de los calculos de los pesos "  
         # una vez seleccionado los terminos de un documento se deben calcular los pesos
         
