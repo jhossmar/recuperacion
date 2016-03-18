@@ -7,6 +7,7 @@ import threading
 from Crawer import Crawer
 from Indexador import Indexador 
 from MaquinaDeBusquedaServidor import MaquinaDeBusquedaServidor
+from Crawler import Crawler
 
 
 
@@ -19,6 +20,9 @@ if __name__ == '__main__':
     crawer.start()
     indexador = Indexador()
     buscador = MaquinaDeBusquedaServidor() 
+    #crawer = Crawler("http://www.python.org", 4, 5)
+    #crawer.explore()
+    # crawer.download_imgs()
 
      
      

@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
-
+from urllib import *
+import urllib2
 
 class Crawler:
     maximum = 0##maximo
@@ -32,16 +33,16 @@ class Crawler:
                         new_crawler = Crawler(new_url, self.recursive, self.maximum, self.n_urls, self.visited_urls)
                         new_crawler.explore()
                     else:
-                        new_url = self.get_url(link.get('href')
+                        new_url = self.get_url(link.get('href'))
                         self.visited_urls[new_url] = 1
                  
     def get_parser(self):
         if((self.n_urls >= self.maximum) and (self.maximum > 0)):
             return None
         try:
-            req = urllib.request.Request(self.s_url)
-            page = urllib.request.urlopen(req)
-        except urllib.error.HTTPError as e:
+            req = urllib2.Request(self.s_url)
+            page = urllib2.urlopen(req)
+        except urllib2.HTTPError as e:
             return None
  
         self.visited_urls[self.s_url] = 1
@@ -56,9 +57,9 @@ class Crawler:
             last_slash = img_url.rfind('/') + 1
             name = img_url[last_slash:]
             try:
-                req = urllib.request.Request(img_url)
-                page = urllib.request.urlopen(req)
-            except urllib.error.HTTPError as e:
+                req = urllib2.Request(img_url)
+                page = urllib2.urlopen(req)
+            except urllib2.HTTPError as e:
                 continue
             f = open(name, 'bw')
             f.write(page.read())
