@@ -1,0 +1,67 @@
+﻿<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+La problemática de la RI
+De forma general – según Baeza-Yates [2] – el problema de la RI puede ser
+estudiado desde dos puntos de vista: el computacional y el humano. El primer caso tiene
+que ver con la construcción de estructuras de datos y algoritmos eficientes que mejoren la
+calidad de las respuestas. El segundo caso corresponde al estudio del comportamiento y
+de las necesidades de los usuarios.
+Si se analiza la problemática de la RI desde un alto nivel de abstracción (Figura 1)
+podemos establecer que:
+– Existe una colección de documentos que contienen información de interés
+(sobre uno o varios temas)
+– Existen usuarios con necesidades de información, quienes las plantean al SRI
+en forma de una consulta (en inglés, query. En adelante, ambas palabras se
+utilizarán indistintamente)
+– Como respuesta, el sistema retorna – de forma ideal – referencias a
+documentos “relevantes”, es decir aquellos que satisfacen la necesidad
+expresada, generalmente en forma de una lista rankeada.
+10
+Conjunto
+de
+Documentos
+
+Planteamos que la respuesta “ideal” de un SRI está formada solamente por
+documentos relevantes a la consulta, pero – en la práctica – esta no es aún alcanzable.
+Esto se debe a que – entre otros motivos – existe el problema de compatibilizar la
+expresión de la necesidad de información y el lenguaje y de los documentos. Además,
+hay una carga de subjetividad subyacente y depende de los usuarios. Entonces, el SRI
+recupera la mayor cantidad posible de documentos relevantes, minimizando la cantidad
+de documentos no relevantes (ruido) en la respuesta. En términos de eficiencia, se
+plantea la idea de precisión de la respuesta, es decir, cuando más documentos
+relevantes contenga el conjunto solución (para una consulta dada), más preciso será.
+Para cumplir con sus objetivos, un SRI debe realizar algunas tareas básicas, las
+cuales se encuentran – fundamentalmente – planteadas en cuestiones computacionales,
+a saber:
+– Representación lógica de los documentos y – opcionalmente – almacenamiento
+del original. Algunos sistemas solo almacenan porciones de los documentos y
+otros lo hacen de manera completa.
+– Representación de la necesidad de información del usuario en forma de
+consulta.
+– Evaluación de los documentos respecto de una consulta para establecer la
+relevancia de cada uno.
+– Ranking de los documentos considerados relevantes para formar el “conjunto
+solución” o respuesta.
+– Presentación de la respuesta al usuario.
+11
+– Retroalimentación o refinamiento de las consultas (para aumentar la calidad de
+la respuesta)
+En la figura 2 se puede apreciar con mayor detalle la arquitectura básica de un SRI,
+el tratamiento de los documentos y la interacción con el usuario. Aquí se ven algunos
+componentes que no se habían mencionado hasta el momento.
+Como podemos observar, se parte de un conjunto de documentos de texto, los
+cuales están compuestos por sucesiones de palabras que forman estructuras
+gramaticales (por ejemplo, oraciones y párrafos). Tales documentos están escritos en
+lenguaje natural y expresan ideas de su autor sobre un determinado tema. El conjunto de
+todos los documentos con los que se trata y sobre los que se deben realizar operaciones
+de RI se denomina corpus, colección o base de datos textual o documental. Para
+poder realizar operaciones sobre un corpus, es necesario obtener primero una
+representación lógica de todos sus documentos, la cual puede consistir en un conjunto
+de términos, frases u otras unidades (sintácticas o semánticas) que permitan – de alguna
+manera – caracterizarlos. Por ejemplo, la representación de los documentos mediante un
+conjunto de sus términos se la conoce como “bolsa de palabras” (bag of words).
+</body>
+</html>

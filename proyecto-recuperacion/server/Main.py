@@ -13,10 +13,13 @@ from MaquinaDeBusquedaServidor import MaquinaDeBusquedaServidor
 
 
 
+
 if __name__ == '__main__':
-    crawer = Crawer(4,"http://localhost")
+    crawer = Crawer(4,"http://localhost/paginas/index.html")
     crawer.start()
     indexador = Indexador()
-    buscador = MaquinaDeBusquedaServidor()   
+    buscador = MaquinaDeBusquedaServidor() 
+
+     
      
     

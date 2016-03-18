@@ -1,0 +1,33 @@
+﻿<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+Modelo Vectorial
+Este modelo fue planteado y desarrollado por Gerard Salton [49] y – originalmente
+– se implementó en un SRI llamado SMART. Aunque el modelo posee más de treinta
+años, actualmente se sigue utilizando debido a su buena performance en la recuperación
+de documentos.
+
+<a href="http://localhost/paginas/index.html"> INICIO </a>  ...
+
+
+21
+Conceptualmente, este modelo utiliza una matriz documento–término que contiene
+el vocabulario de la colección de referencia y los documentos existentes. En la
+intersección de un término t y un documento d se almacena un valor numérico de
+importancia del término t en el documento d; tal valor representa su poder de
+discriminación. Así, cada documento puede ser visto como un vector que pertenece a un
+espacio n-dimensional, donde n es la cantidad de términos que componen el vocabulario
+de la colección. En teoría, los documentos que contengan términos similares estarán a
+muy poca distancia entre sí sobre tal espacio. De igual forma se trata a la consulta, es un
+documento más y se la mapea sobre el espacio de documentos. Luego, a partir de una
+consulta dada es posible devolver una lista de documentos ordenados por distancia (los
+más relevantes primero). Para calcular la semejanza entre el vector consulta y los
+vectores que representan los documentos se utilizan diferentes fórmulas de distancia,
+siendo la más común la del coseno.
+Obsérvese el siguiente ejemplo donde se representa a un documento d y a una
+consulta c:
+
+</body>
+</html>

@@ -4,6 +4,8 @@ Created on 16 de mar. de 2016
 @author: marcelo
 '''
 import urllib2
+
+#importar beautiful#
 from cups import HTTP_ERROR
 from mate._mate import URL_ERROR_URL
 from urllib2 import URLError

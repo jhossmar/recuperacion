@@ -8,6 +8,8 @@ import urllib2
 from urllib2 import URLError
 from cups import HTTP_ERROR
 from mate._mate import URL_ERROR_URL
+from BeautifulSoup import BeautifulSoup
+
 
 
 class Crawer(threading.Thread):
@@ -23,27 +25,27 @@ class Crawer(threading.Thread):
     def run(self):
         print "iniciando crawer"
         print "Buscando Documentos "
-        try:
-            f = urllib2.urlopen(self.semilla)
-            print f.read() 
-            f.close()
-        except HTTP_ERROR, e:
-            print "Ocurrio un error"
-            print e.code
-        except URL_ERROR_URL, e:
-            print "Ocurrio un error"
-            print e.reason
-        except URLError, e:
-            print "No se puede conectar con:'",self.semilla,"'"
-            print "Verifique su conexion a internet ......"
+        url=self.semilla
+        while 1:
+            try:
+                f = urllib2.urlopen(url)
+                print f.read()
+#                 num = self.buscarUrls()
+#                 if(num==0):
+#                     print "numero de  URLS: ",num
+#                       
+                f.close()
+            except HTTP_ERROR, e:
+                print "Ocurrio un error"
+                print e.code
+            except URL_ERROR_URL, e:
+                print "Ocurrio un error"
+                print e.reason
+            except URLError, e:
+                print "No se puede conectar con:'",self.semilla,"'"
+                print "Verifique su conexion a internet ......"
 
-            
-           
-               
-    
-    
-    
-    
+   
     def  analisisLexico(self):
         print "analizando lexico "   
         
@@ -75,6 +77,15 @@ class Crawer(threading.Thread):
     
     def registrarDocEnTabla(self):      
         print ("Registrando  documento en tabla TBDOCUMENTO")
+        
+        
+    def buscarUrls(self):
+        print "buscando links"
+        count = 0
+        for link in BeautifulSoup.soup.findAll('a'):
+            print (link.get('href'))
+            count = count +1      
+        return count
     
        
        

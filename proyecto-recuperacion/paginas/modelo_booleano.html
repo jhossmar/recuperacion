@@ -1,0 +1,41 @@
+﻿<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+En el modelo booleano la representación de la colección de documentos se realiza
+sobre una matriz binaria documento–término, donde los términos han sido extraídos
+manualmente o automáticamente de los documentos y representan el contenido de los
+mismos.
+t1 t2 t3 … tn
+d1 1 0 0
+20
+Modelo booleano
+Modelo Vectorial
+Modelo Probabilístico
+No estructurados
+Estructurados
+Documentos
+Modelos basados en
+el álgebra de regiones
+d2 1 1 1
+d3 0 0 1
+…
+dn
+Matriz binaria documento – término
+Las consultas se arman con términos vinculados por operadores lógicos (AND, OR,
+NOT) y los resultados son referencias a documentos donde cuya representación satisface
+las restricciones lógicas de la expresión de búsqueda. En el modelo original no hay
+ranking de <a href="http://localhost/paginas/relevancia.html">relevancia</a>
+ sobre el conjunto de respuestas a una consulta, todos los
+documentos poseen la misma relevancia. A continuación se muestra un ejemplo mediante
+conjuntos de operaciones utilizando el modelo booleano.
+A = {Documentos que contienen el término T1}
+B = {Documentos que contienen el término T2}
+Si bien es el primer modelo desarrollado y aún se lo utiliza, no es el preferido por
+los ingenieros de software para sus desarrollos. Existen diversos puntos en contra que
+hacen que cada día se lo utilice menos y – además – se han desarrollado algunas
+extensiones, bajo el nombre modelo booleano extendido [64] [51], que tratan de mejorar
+algunos puntos débiles.
+</body>
+</html>
