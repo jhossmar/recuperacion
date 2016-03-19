@@ -15,9 +15,16 @@ try:
     soup = BeautifulSoup(f)
     contenido = soup.get_text()
     palabras = contenido.split(' ')
-    lista_palabras = {}
+    frecuenciaDeTerminos = []
     for palabra in palabras:
-        print palabra.upper()
+        df = palabras.count(palabra)
+        var = palabra,df
+        frecuenciaDeTerminos.append(var)
+    print "IMPRIMIENDO TERMINOS MAS SU FRECUENCIA"
+    for df in frecuenciaDeTerminos:
+        print df[0],"->",df[1]
+        print ""
+        
     
     
     links = soup.find_all('a')
