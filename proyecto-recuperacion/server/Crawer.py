@@ -59,7 +59,7 @@ class Crawer(threading.Thread):
                 if(self.esCorrectaURL(newUrl)==True):
                     res.append( newUrl)
             return res
-          
+           
         except Exception, e:
             print "no se pudo conectar con  internet"
             return res
@@ -71,7 +71,7 @@ class Crawer(threading.Thread):
 #             for u in lista:
 #                 print u
 #                 res.append(u)
-#            
+#             
 #         else:
 #             f = urllib2.urlopen(url)
 #             soup = BeautifulSoup(f)
@@ -83,7 +83,7 @@ class Crawer(threading.Thread):
 #                     print newUrl,"URL nueva"
 #                     self.optenerlistaUrls(newUrl,lista)
 #                     print "---------------------------"
-#                     return lista
+                    
                     
                 
     def esCorrectaURL(self,url):
@@ -120,7 +120,7 @@ class Crawer(threading.Thread):
         bd = DB("localhost","root","","recuperacion")
         for termino in listaTerminos:
             consulta = "INSERT INTO DOCUMENTO VALUES ('",termino,"')"
-            bd.setDatos(consulta)
+           # bd.setDatos(consulta)
             
         
         
