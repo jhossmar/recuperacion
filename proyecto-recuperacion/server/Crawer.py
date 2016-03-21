@@ -9,6 +9,7 @@ from urllib2 import URLError
 from cups import HTTP_ERROR
 from mate._mate import URL_ERROR_URL
 from bs4 import BeautifulSoup
+from DB import DB
 
 
 
@@ -27,19 +28,106 @@ class Crawer(threading.Thread):
         print "Buscando Documentos "
         url=self.semilla
         count =0
-        while count <=self.recursion:
+        listaUrls = self.optenerlistaUrls(url)
+        for link in  listaUrls:
+             print link,"---->>>>"
+        print "tamanio de la lista ",len(listaUrls)
+        
+        while count <len(listaUrls):
             documento =  self.capturarDocumentos(url)
             if(documento != None):
-                self.analisisLexico(documento)
-                break
+                listaDeTterminos =self.analisisLexico(documento)
+                self.indexarDocumento(listaDeTterminos,url)
+                url = listaUrls[count]
+                count = count +1
             else:
                 print " no se pudo obtener  el contenido del documento. "
                 print "verificar su coneccion a internet."    
-                break
+                count = count +1
+                 
         
             
            
-
+    def optenerlistaUrls(self,url):
+        print "Obteniendo lista de urls a indexar"
+        res =[]
+        try:
+            soup = self.capturarDocumentos(url)
+            links =  soup.find_all('a')
+            for link in links:
+                newUrl= link.get('href')
+                if(self.esCorrectaURL(newUrl)==True):
+                    res.append( newUrl)
+            return res
+          
+        except Exception, e:
+            print "no se pudo conectar con  internet"
+            return res
+        
+#         if(self.contarLinks(url)==0 ):
+#             print "no hay mas links"
+#             print len(lista), "TAMANIOO DE LA LISTA DE URLS"
+#             res=[]
+#             for u in lista:
+#                 print u
+#                 res.append(u)
+#            
+#         else:
+#             f = urllib2.urlopen(url)
+#             soup = BeautifulSoup(f)
+#             links =  soup.find_all('a')
+#             lista.append(url)
+#             for link in links:
+#                 newUrl= link.get('href')#"http://"link.get('href')
+#                 if(self.esCorrectaURL(newUrl)==True):
+#                     print newUrl,"URL nueva"
+#                     self.optenerlistaUrls(newUrl,lista)
+#                     print "---------------------------"
+#                     return lista
+                    
+                
+    def esCorrectaURL(self,url):
+        if(url == None):
+            return False
+        if (len(url) <= 2):
+            return False
+        if(url[0:10] == 'javascript'):
+            return False
+        if((url[0:7] == 'http://') or (url[0:8] == 'https://')):
+            return True
+        else:
+            return False
+        
+    
+    def contarLinks(self,url):
+        f = urllib2.urlopen(url)
+        soup = BeautifulSoup(f)
+        links = soup.find_all('a')
+        res = 0
+        for link in links:
+            res = res +1
+        print "cantidad de links  en ", url, "= a ", res
+        return res
+        
+          
+        
+    
+        
+        
+        
+    def indexarDocumento(self,listaTerminos,url):
+        print "indexando documentos: ", url
+        bd = DB("localhost","root","","recuperacion")
+        for termino in listaTerminos:
+            consulta = "INSERT INTO DOCUMENTO VALUES ('",termino,"')"
+            bd.setDatos(consulta)
+            
+        
+        
+        
+        
+        
+        
    
     def  analisisLexico(self, documento ):
         # elimina signos de puntuacion,separadores,espacios, tabuladores tratamiento de mayusculas minusculas, se eliminan caracteres extranos 
@@ -57,6 +145,8 @@ class Crawer(threading.Thread):
         count =1
         for ter in lista_terminos:
             print count,": ",ter
+            count = count+1
+        return lista_terminos
         # alanalisis de terminos que representan el docuemrnto (los de mayor frecuencia en el documento )
         
             
