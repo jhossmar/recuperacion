@@ -10,7 +10,6 @@ from bs4 import BeautifulSoup
 from cups import HTTP_ERROR
 from mate._mate import URL_ERROR_URL
 from urllib2 import URLError
-from Socket import Socket
 # url = "https://localhost/paginas/index.html"
 # try:
 #     f = urllib2.urlopen(url)
@@ -64,17 +63,15 @@ from Socket import Socket
 #     print "verifique su conexion a la Base de DATOS"
 #     print e
     
-# respuestas = "|www.google.com;0.89;192.168.6.7|www.google.com;0.90;192.168.6.7|www.google.com;0.78;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.60;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.89;192.168.6.7|"
-# listaDeRespuestas  =  respuestas.split('|')
-# suma =0
-# for respuesta in listaDeRespuestas[1:-1]:
-#     #print respuesta
-#      res = respuesta.split(";") 
-#      print res[1]
-#   #   suma = suma+integ(res[1])
+respuestas = "|www.google.com;0.89;192.168.6.7|www.google.com;0.90;192.168.6.7|www.google.com;0.78;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.60;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.89;192.168.6.7|www.google.com;0.89;192.168.6.7|"
+listaDeRespuestas  =  respuestas.split('|')
+suma =0
+for respuesta in listaDeRespuestas[1:-1]:
+    #print respuesta
+     res = respuesta.split(";") 
+     print res[1]
+  #   suma = suma+integ(res[1])
 
-
-sk = Socket("127.0.0.1","8087")
 
 
 

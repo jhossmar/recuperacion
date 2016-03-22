@@ -9,7 +9,7 @@ class Socket(object):
     def __init__(self,host,puerto):
        print "iniciando socket servidor:"
        self.s = socket.socket()
-       self.s.bind(("192.168.43.5", 8087))
+       self.s.bind((host, puerto))
        self.s.listen(10)
        self.sc, self.addr = self.s.accept()
        self.recibirDatos() ## Esperando la consulta del cliente
