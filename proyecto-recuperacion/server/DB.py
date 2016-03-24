@@ -21,7 +21,7 @@ class DB(object):
         if(self.conexion !=False):
             print "se conecto con la base de datos"
         
-          
+       
         
     def establecerConeccion(self):
         try:

@@ -1,9 +1,16 @@
 
-
+from Socket import  Socket
 class MaquinaDeBusquedaServidor(object):
     
     def __init__(self):
         print "inicializando al maquina de busqueda del Servidor"
+        sk= Socket("127.0.0.1",8087)
+        sk.start()
+          
+            
+            
+            
+  
     
     def seleccionarTerminosConsulta(self):
         print "seleccionando terminos de la consulta del usuario"

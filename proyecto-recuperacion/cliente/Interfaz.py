@@ -5,6 +5,7 @@ Created on 13 de mar. de 2016
 '''
 from Tkinter import *
 from Socket import Socket
+from __builtin__ import str
 class Interfaz(object):
 
     '''
@@ -34,15 +35,17 @@ class Interfaz(object):
         
         
     def mostrar(self):
-        
+        ##mostramos la interfaz grafica
         self.c.mainloop()
     
     def enviar(self,consulta):
         #print consulta
-        listaServidores = ['109876543','192.168.43.5','192.168.3.2']
-        listaSocketEsperando = []
+        listaServidores = ['192.168.43.53','127.0.0.1','192.168.9.5']
+        #listaSocketEsperando = []
         for servidor in listaServidores:
-            sk = Socket(servidor,consulta)
+            print "conectando con ",str(servidor)
+            print "enviando consulta",str(consulta)
+            sk= Socket(str(servidor),str(consulta))
             sk.start()
             #listaSocketEsperando.append(sk)
             print "next IP"

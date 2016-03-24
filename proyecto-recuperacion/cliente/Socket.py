@@ -12,7 +12,7 @@ class Socket(threading.Thread):
     def __init__(self, host,consulta):
        threading.Thread.__init__(self)
        print "iniciando socket cliente:"
-       self.s = socket.socket()
+       self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
        self.host = host
        self.consulta = consulta
      
@@ -22,10 +22,13 @@ class Socket(threading.Thread):
            
             self.s.connect((self.host,8087))
             self.enviarDatos(self.consulta)
-#             while 1:
-#                 print "esperando respuesta del servidor"
+            print "esperando respuesta del servidor"
+            respuesta =self.recibirDatos()
+            print "servidor respondio: ", respuesta
+            
         except Exception,e:
             print 'no se conecto con el servidor',self.host
+            print e
        
        
         
@@ -38,9 +41,9 @@ class Socket(threading.Thread):
      
    
     def recibirDatos(self):
-         self.s.listen(10) # esperando datos
-         recibido = self.sc.recv(1000)
-         return recibido 
+        # self.s.listen(10) # esperando datos
+        recibido = self.s.recv(1000)
+        return recibido 
         
 
     def cerrarSocket(self):

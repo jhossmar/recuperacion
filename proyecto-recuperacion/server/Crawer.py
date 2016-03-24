@@ -9,8 +9,7 @@ from urllib2 import URLError
 from cups import HTTP_ERROR
 from mate._mate import URL_ERROR_URL
 from bs4 import BeautifulSoup
-from DB import DB
-
+from Indexador import Indexador
 
 
 class Crawer(threading.Thread):
@@ -26,28 +25,26 @@ class Crawer(threading.Thread):
     def run(self):
         print "iniciando crawer"
         print "Buscando Documentos "
-        url=self.semilla
+        url=self.semilla #localhost/paginas/index.html
         count =0
-        listaUrls = self.optenerlistaUrls(url)
+        listaUrls = self.optenerlistaUrls(url) #[0,1]
+        documento =  self.capturarDocumentos(url)
+        if(documento != None):
+            listaDeTterminos =self.analisisLexico(documento)
+            self.indexarDocumento(listaDeTterminos,url)
+       
         for link in  listaUrls:
-             print link,"---->>>>"
-        print "tamanio de la lista ",len(listaUrls)
-        
-        while count <len(listaUrls):
-            documento =  self.capturarDocumentos(url)
+            print link,"---->>>>"
+            documento =  self.capturarDocumentos(link)
             if(documento != None):
                 listaDeTterminos =self.analisisLexico(documento)
-                self.indexarDocumento(listaDeTterminos,url)
-                url = listaUrls[count]
-                count = count +1
+                self.indexarDocumento(listaDeTterminos,link)    
             else:
-                print " no se pudo obtener  el contenido del documento. "
-                print "verificar su coneccion a internet."    
-                count = count +1
-                 
-        
-            
-           
+                print " no se pudo obtener  el contenido del documento. ", url
+                print "verificar su coneccion a internet." 
+        print "crawer finalizo!!!"   
+             
+                  
     def optenerlistaUrls(self,url):
         print "Obteniendo lista de urls a indexar"
         res =[]
@@ -61,7 +58,7 @@ class Crawer(threading.Thread):
             return res
            
         except Exception, e:
-            print "no se pudo conectar con  internet"
+            print "no se pudo conectar con :", url
             return res
         
 #         if(self.contarLinks(url)==0 ):
@@ -117,18 +114,41 @@ class Crawer(threading.Thread):
         
     def indexarDocumento(self,listaTerminos,url):
         print "indexando documentos: ", url
-        bd = DB("localhost","root","","recuperacion")
-        for termino in listaTerminos:
-            consulta = "INSERT INTO DOCUMENTO VALUES ('",termino,"')"
-           # bd.setDatos(consulta)
-            
+        indexador = Indexador(listaTerminos,url)
+#         bd = DB("127.0.0.1","root","","recuperacion")
+#         bd.conectarConDB()
+#        # ultimoid=self.UltimoIDDB()
+#         consulta1= "INSERT INTO DOCUMENTO(url) VALUES ('%s')" % url
+#         bd.setDatos(consulta1)
+#         bd.cerrarConexion()
+#         for termino in listaTerminos:
+#             print "guardando en la BD el termino: ",termino
+#             consulta= "INSERT INTO DOCUMENTO VALUES (1,'%s')" % termino
+#             #consulta = "INSERT INTO DOCUMENTO VALUES(1,'localhost')"
+#             print consulta,""
+#             bd.setDatos(consulta)
+    
         
         
         
         
-        
-        
-   
+    def UltimoIDDB(self):
+         bd = DB("127.0.0.1","root","","recuperacion")
+         bd.conectarConDB()
+         consulta = "SELECT id_documento FROM DOCUMENTO" 
+         res = bd.getDatos(consulta)
+         print res
+         ult=0
+         for r in res:
+             ult = ult+1
+         return ult
+         
+         
+       
+         
+         
+         
+         
     def  analisisLexico(self, documento ):
         # elimina signos de puntuacion,separadores,espacios, tabuladores tratamiento de mayusculas minusculas, se eliminan caracteres extranos 
         print "analizando lexico " 
