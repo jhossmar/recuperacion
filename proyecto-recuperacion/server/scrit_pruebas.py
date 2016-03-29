@@ -117,9 +117,27 @@ Created on 16 de mar. de 2016
 #         # Cerrando conexion
 #         conn.close()
 
-from Socket import Socket
+# from Socket import Socket
+# 
+# sk= Socket("127.0.0.1",8087)
+# sk.start()
+# 
+# f = open("diccionario_negativo.txt","r")
+# diccionarioNegativo = f.read().split()
+# 
+# print diccionarioNegativo
+# for t in diccionarioNegativo:
+#     print t
 
-sk= Socket("127.0.0.1",8087)
-sk.start()
+
+import os
+f = os.popen('ifconfig wlan0 | grep "inet\ addr" | cut -d: -f2 | cut -d" " -f1')
+your_ip=f.read()
+hola = "HOLA"
+bola = "BOLA"
+print type(your_ip)
+print"%s%s"%(hola,bola)
+print "SELECT %s fROM %s"%(your_ip,hola)
+
 
 

@@ -5,11 +5,13 @@ Created on 13 de mar. de 2016
 '''
 import threading
 import urllib2
+import unicodedata
 from urllib2 import URLError
 from cups import HTTP_ERROR
 from mate._mate import URL_ERROR_URL
 from bs4 import BeautifulSoup
 from Indexador import Indexador
+
 
 
 class Crawer(threading.Thread):
@@ -24,7 +26,7 @@ class Crawer(threading.Thread):
     
     def run(self):
         print "iniciando crawer"
-        print "Buscando Documentos "
+        print "Buscando Documentos"
         url=self.semilla #localhost/paginas/index.html
         count =0
         listaUrls = self.optenerlistaUrls(url) #[0,1]
@@ -34,6 +36,7 @@ class Crawer(threading.Thread):
             self.indexarDocumento(listaDeTterminos,url)
        
         for link in  listaUrls:
+           
             print link,"---->>>>"
             documento =  self.capturarDocumentos(link)
             if(documento != None):
@@ -153,12 +156,13 @@ class Crawer(threading.Thread):
         # elimina signos de puntuacion,separadores,espacios, tabuladores tratamiento de mayusculas minusculas, se eliminan caracteres extranos 
         print "analizando lexico " 
         contenido = documento.get_text()
-        palabras = contenido.split(' ')
+        palabras = contenido.split()
         palabras_limpias = self.extraer_caracteres_extranios(palabras)
         lista_terminos = [] #lista de terminos de este documento#
         for palabra in palabras_limpias:
             if (self.verificarPalabra(palabra)==True):
                 palabraMayuscula = palabra.upper()
+                palabraMayuscula= self.elimina_tildes(palabraMayuscula)
                 print "termino en mayuscula :", palabraMayuscula
                 lista_terminos.append(palabraMayuscula)
         print " IMPRIMIENTDO LISTE DE TERMINOS"
@@ -243,7 +247,7 @@ class Crawer(threading.Thread):
     def buscarUrls(self,url):
         print "buscando links"
         f = urllib2.urlopen(url)
-        soup = BeautifulSoup(f)
+        soup = Beautifulelimina_tildesSoup(f)
         count = 0
         for link in soup.findAll('a'):
             print "buscando URLs en ", link.get('href')
@@ -252,6 +256,10 @@ class Crawer(threading.Thread):
             count = count +1      
         return count
     
+    
+    def elimina_tildes(self,s):
+        return ''.join((c for c in unicodedata.normalize('NFD', s) if unicodedata.category(c) != 'Mn'))
+ 
        
        
         

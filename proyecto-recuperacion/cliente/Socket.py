@@ -42,7 +42,7 @@ class Socket(threading.Thread):
    
     def recibirDatos(self):
         # self.s.listen(10) # esperando datos
-        recibido = self.s.recv(1000)
+        recibido = self.s.recv(100000000)
         return recibido 
         
 

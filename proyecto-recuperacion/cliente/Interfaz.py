@@ -40,7 +40,7 @@ class Interfaz(object):
     
     def enviar(self,consulta):
         #print consulta
-        listaServidores = ['192.168.43.53','127.0.0.1','192.168.9.5']
+        listaServidores = ['192.168.43.5','192.168.6.7']
         #listaSocketEsperando = []
         for servidor in listaServidores:
             print "conectando con ",str(servidor)
